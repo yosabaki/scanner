@@ -15,6 +15,7 @@
 #include <QThread>
 #include <QDesktopServices>
 #include <QDesktopServices>
+#include <QScrollBar>
 
 main_window::main_window(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -36,7 +37,8 @@ main_window::main_window(QWidget *parent): QMainWindow(parent), ui(new Ui::MainW
     ui->treeView->hideColumn(1);
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
-    ui->treeView->setMaximumWidth(400);
+    ui->treeView->setAutoScroll(true);
+    ui->treeView->setMaximumWidth(QApplication::desktop()->screenGeometry().width() / 4);
 
     expand(dirModel->index(QDir::homePath()));
 

@@ -98,19 +98,21 @@ QVector<QList<QString>> Scanner::scanNextFileGroup(int key) {
             ++curr_pos;
         }
         std::sort(key_hashes.begin(), key_hashes.end());
-        QByteArray prevHash = std::get<0>(key_hashes[0]);
-        for (int j = 1; j < key_hashes.size(); ++j) {
-            if (prevHash  == std::get<0>(key_hashes[j])) {
-                QList<QString> equalFileList;
-                equalFileList.append(std::get<1>(key_hashes[j - 1]));
-                while (j < key_hashes.size() && std::get<0>(key_hashes[j]) == prevHash) {
-                    equalFileList.append(std::get<1>(key_hashes[j]));
-                    ++j;
+        if (!key_hashes.isEmpty()) {
+            QByteArray prevHash = std::get<0>(key_hashes[0]);
+            for (int j = 1; j < key_hashes.size(); ++j) {
+                if (prevHash  == std::get<0>(key_hashes[j])) {
+                    QList<QString> equalFileList;
+                    equalFileList.append(std::get<1>(key_hashes[j - 1]));
+                    while (j < key_hashes.size() && std::get<0>(key_hashes[j]) == prevHash) {
+                        equalFileList.append(std::get<1>(key_hashes[j]));
+                        ++j;
+                    }
+                    equalFiles.push_back(equalFileList);
                 }
-                equalFiles.push_back(equalFileList);
-            }
-            if (j < key_hashes.size()) {
-                prevHash = std::get<0>(key_hashes[j]);
+                if (j < key_hashes.size()) {
+                    prevHash = std::get<0>(key_hashes[j]);
+                }
             }
         }
     }
