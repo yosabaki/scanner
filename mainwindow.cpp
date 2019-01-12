@@ -32,8 +32,8 @@ main_window::main_window(QWidget *parent): QMainWindow(parent), ui(new Ui::MainW
 
     ui->treeView->setModel(dirModel);
 
-    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-
+//    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+//    ui->treeView->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->treeView->hideColumn(1);
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
@@ -95,14 +95,15 @@ void main_window::deleteItems() {
                 break;
             }
         }
-        for (auto item:itemList) {
-            QString path = item->text(2);
+        for(auto it = itemList.begin(); it!= itemList.end(); ++it) {
+            QString path = (*it)->text(2);
             QFile file(path);
             if (file.remove()) {
-                delete item;
+                delete (*it);
             } else {
                 QMessageBox::StandardButton alert;
-                alert = QMessageBox::question(this,"Continue?","File " + itemList.first()->text(2) + " can't be deleted.", QMessageBox::Yes | QMessageBox::No);
+                alert = QMessageBox::question(this,"Continue?","File " + (*it)->text(2) + " can't be deleted.", QMessageBox::Yes | QMessageBox::No);
+                itemList.erase(it);
                 if (alert == QMessageBox::No) {
                     break;
                 }
