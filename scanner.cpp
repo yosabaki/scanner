@@ -34,7 +34,7 @@ QByteArray Scanner::calcHash(const QString &path) {
     QFile file(path);
 
     if(!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(0, "error", file.errorString());
+        return QByteArray();
     }
 
     QCryptographicHash::Algorithm hashAlgo = QCryptographicHash::Sha512;
