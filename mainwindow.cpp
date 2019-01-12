@@ -310,7 +310,6 @@ void main_window::addScannedFiles(QVector<QList<QString> > files) {
 
         QColor color(rand() % 256, rand() % 256, rand() % 256);
         QColor textColor("black");
-        QBrush brush(color);
         if (color.black() > 100) {
             textColor = QColor("white");
         }
@@ -326,7 +325,7 @@ void main_window::addScannedFiles(QVector<QList<QString> > files) {
             item->setCheckState(0, Qt::Unchecked);
             item->setText(3, QString('0'+id));
             for (int i = 0;i < 3; i++) {
-                item->setBackground(i,brush);
+                item->setBackgroundColor(i, color);
                 item->setTextColor(i,textColor);
             }
             item->setIcon(0, iconProvider.icon(file_info));
