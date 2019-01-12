@@ -1,14 +1,17 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-10-21T16:36:58
+# Project created by QtCreator 2019-01-09T04:20:51
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += testlib
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       -= gui
 
-TARGET = scanner
+TARGET = tst_testtest
+CONFIG   += console
+CONFIG   -= app_bundle
+
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,16 +27,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    custommodel.cpp \
-    scanner.cpp
+        tst_testtest.cpp 
 
-HEADERS += \
-        mainwindow.h \
-    custommodel.h \
-    scanner.h
-
-FORMS += \
-        mainwindow.ui
-
+DEFINES += SRCDIR=\\\"$$PWD/\\\"
