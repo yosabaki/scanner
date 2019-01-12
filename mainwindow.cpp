@@ -103,7 +103,6 @@ void main_window::deleteItems() {
                 alert = QMessageBox::question(this,"Continue?","File " + itemList.first()->text(2) + " can't be deleted.", QMessageBox::Yes | QMessageBox::No);
                 if (alert == QMessageBox::No) {
                     break;
-                    return;
                 }
             }
         }
